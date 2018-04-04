@@ -1,0 +1,71 @@
+1、内容：验收工具
+2、进展描述：1、工具上线，解决了最后的小问题
+	     2、尝试编写统一登陆数据库
+  	     3、根据sonar修改验收工具代码
+3：下一步计划：开始统一登陆
+
+
+,
+	(
+		'49',
+		'健康调查',
+		'MENU',
+		'48',
+		'11764',
+		'Y',
+		'newHealthCheck.next',
+		'XIN_JIAN_KANG_DIAO_CHA_48',
+		'1'
+	),
+	(
+		'50',
+		'健康调查验收工具说明文档',
+		'MENU',
+		'48',
+		'11764',
+		'Y',
+		'newHealthWord.next',
+		'WEN_DANG_48',
+		'2'
+	)
+
+
+
+UPDATE ieq_access_control_menu
+SET TEXT = '健康调查业务老版本'
+WHERE
+	TEXT = '健康调查业务';
+
+INSERT INTO ieq_access_control_role_menu_ref
+VALUES
+	('1', '48'),
+	('2', '48'),
+	('1', '49'),
+	('2', '49'),
+	('1', '50'),
+	('2', '50');
+
+2.1 Handler
+
+　　Handler在android里负责发送和处理消息，通过它可以实现其他线程与Main线程之间的消息通讯。
+
+　　2.2 Looper
+
+　　Looper负责管理线程的消息队列和消息循环
+
+　　2.3 Message
+
+　　Message是线程间通讯的消息载体。两个码头之间运输货物，Message充当集装箱的功能，里面可以存放任何你想要传递的消息。
+
+　　2.4 MessageQueue
+
+　　MessageQueue是消息队列，先进先出，它的作用是保存有待线程处理的消息。
+创建一个Handler时一定要关联一个Looper实例，默认构造方法Handler()，它是关联当前Thread的Looper。我们在UI Thread中创建一个Handler,那么此时就关联了UI Thread的Looper！
+
+Handler只是处理它所关联的Looper中的MessageQueue中的Message，至于它哪个线程的Looper，Handler并不是很关心！
+UI线程或Worker线程提供MessageQueue，Handler向其中填Message，Looper从其中读Message，然后交由 Message自己的target即Handler来处理！
+！最终被从属于UI线程的Handler的handlMessag(Message msg)方法被调用！！
+
+
+
+
